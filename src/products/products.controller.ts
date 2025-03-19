@@ -1,4 +1,4 @@
-import { Controller, ParseIntPipe } from '@nestjs/common';
+import { Controller, NotImplementedException, ParseIntPipe } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -48,6 +48,18 @@ export class ProductsController {
 
         //return { id: updateProductDto.id, updateProductDto }
         return this.productsService.update(updateProductDto.id, updateProductDto);
+    }
+
+    @MessagePattern({ cmd: 'validate_product' })
+    validateProduct(@Payload() ids: number[]) {
+        //return ids;
+
+        try {
+            return this.productsService.validateProduct(ids["productsId"]);
+
+        } catch (error) {
+            throw new NotImplementedException(`Error creating products: ${error.message}`);
+        }
     }
 
 }
