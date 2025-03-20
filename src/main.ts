@@ -8,13 +8,13 @@ async function bootstrap() {
     const logger = new Logger('Products-Microservice-main');
     // const app = await NestFactory.create(AppModule);
 
-
     const app = await NestFactory.createMicroservice<MicroserviceOptions>(
         AppModule,
         {
-            transport : Transport.TCP,
+            transport: Transport.NATS,
             options: {
-                port: envs.PORT
+                //port: envs.PORT
+                servers: envs.NATS_SERVERS,
             }
         }
     );
@@ -34,5 +34,6 @@ async function bootstrap() {
 
     await app.listen(/* envs.PORT */);
     logger.log(`products microservices running on http://localhost:${envs.PORT}`);
+    console.log(envs.NATS_SERVERS);
 }
 bootstrap();
