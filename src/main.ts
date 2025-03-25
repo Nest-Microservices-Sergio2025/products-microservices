@@ -35,6 +35,6 @@ async function bootstrap() {
     await app.listen(/* envs.PORT */);
     logger.log(`products microservices running on http://localhost:${envs.PORT}`);
     console.log(envs.NATS_SERVERS);
-    console.log("tercer prueba integracion continua");
+    console.log("cuarto prueba integracion continua");
 }
 bootstrap();
